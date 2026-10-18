@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="cf_beige">#F5EFE6</color>
+    <color name="cf_beige_dark">#E8DCC8</color>
+    <color name="cf_white">#FFFFFF</color>
+    <color name="cf_brown">#3E2723</color>
+    <color name="cf_brown_light">#6D4C41</color>
+    <color name="cf_burgundy">#800020</color>
+    <color name="cf_burgundy_dark">#5C0017</color>
+    <color name="cf_success">#2E7D32</color>
+    <color name="cf_error">#B3261E</color>
+</resources>

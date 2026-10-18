@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ChicFlow Tunisia</string>
+    <string name="app_tagline">Le dressing intelligent</string>
+
+    <!-- Login placeholder (stage 1) -->
+    <string name="login_title">Bienvenue</string>
+    <string name="stage1_notice">Stage 1: backend connection test.\nThe real login screen comes in stage 2.</string>
+    <string name="btn_test_connection">Test connection</string>
+    <string name="status_idle">Not tested yet</string>
+    <string name="status_testing">Testing…</string>
+</resources>

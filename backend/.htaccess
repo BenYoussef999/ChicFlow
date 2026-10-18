@@ -1,0 +1,10 @@
+# Make sure PHP receives the "Authorization: Bearer ..." header
+# (some hosts strip it before it reaches PHP)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+</IfModule>
+
+# No directory listing
+Options -Indexes

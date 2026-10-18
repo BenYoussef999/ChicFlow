@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.ChicFlow" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/cf_burgundy</item>
+        <item name="colorOnPrimary">@color/cf_white</item>
+        <item name="colorPrimaryContainer">@color/cf_beige_dark</item>
+        <item name="colorOnPrimaryContainer">@color/cf_brown</item>
+        <item name="colorSecondary">@color/cf_brown</item>
+        <item name="colorOnSecondary">@color/cf_white</item>
+        <item name="colorSurface">@color/cf_white</item>
+        <item name="colorOnSurface">@color/cf_brown</item>
+        <item name="android:colorBackground">@color/cf_beige</item>
+        <item name="colorError">@color/cf_error</item>
+        <item name="android:statusBarColor">@color/cf_beige</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Theme.ChicFlow.Splash" parent="Theme.ChicFlow">
+        <item name="android:windowBackground">@color/cf_burgundy</item>
+        <item name="android:statusBarColor">@color/cf_burgundy</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>
