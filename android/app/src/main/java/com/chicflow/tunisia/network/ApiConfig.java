@@ -17,5 +17,11 @@ public class ApiConfig {
     // Endpoint names (we add more in each stage)
     public static final String PING = "ping.php";
 
+    // Auth (stage 2)
+    public static final String REGISTER = "auth/register.php";
+    public static final String LOGIN    = "auth/login.php";
+    public static final String LOGOUT   = "auth/logout.php";
+    public static final String PROFILE  = "auth/profile.php";
+
     private ApiConfig() { }
 }

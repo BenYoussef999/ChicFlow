@@ -3,10 +3,40 @@
     <string name="app_name">ChicFlow Tunisia</string>
     <string name="app_tagline">Le dressing intelligent</string>
 
-    <!-- Login placeholder (stage 1) -->
-    <string name="login_title">Bienvenue</string>
-    <string name="stage1_notice">Stage 1: backend connection test.\nThe real login screen comes in stage 2.</string>
-    <string name="btn_test_connection">Test connection</string>
-    <string name="status_idle">Not tested yet</string>
-    <string name="status_testing">Testing…</string>
+    <!-- Login / Register -->
+    <string name="login_title">Welcome back</string>
+    <string name="register_title">Create your account</string>
+    <string name="hint_name">Full name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm password</string>
+    <string name="hint_style">Style preference (optional)</string>
+    <string name="btn_login">Log in</string>
+    <string name="btn_register">Create account</string>
+    <string name="link_to_register">No account yet? Create one</string>
+    <string name="link_to_login">Already have an account? Log in</string>
+
+    <!-- Validation messages -->
+    <string name="err_name">Enter your name (at least 2 characters)</string>
+    <string name="err_email">Enter a valid email address</string>
+    <string name="err_password">Password must have 8 to 72 characters</string>
+    <string name="err_password_required">Enter your password</string>
+    <string name="err_password_match">Passwords do not match</string>
+
+    <!-- Placeholder dashboard (stage 2) -->
+    <string name="welcome_user">Bonjour, %1$s</string>
+    <string name="profile_info">Email: %1$s\nRole: %2$s\nStyle: %3$s</string>
+    <string name="dashboard_placeholder">You are logged in. The wardrobe, outfits, budget and weekly planner arrive in the next stages.</string>
+    <string name="btn_logout">Log out</string>
+    <string name="loading">Loading…</string>
+    <string name="style_none">not set</string>
+
+    <!-- Must match ALLOWED_STYLES in backend/core/validate.php (lowercase there) -->
+    <string-array name="style_options">
+        <item>Classic</item>
+        <item>Casual</item>
+        <item>Sporty</item>
+        <item>Elegant</item>
+        <item>Streetwear</item>
+    </string-array>
 </resources>

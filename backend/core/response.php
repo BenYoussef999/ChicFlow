@@ -68,8 +68,23 @@ function require_fields(array $body, array $fields): void
     }
 }
 
+/** Number of characters (not bytes) in a UTF-8 string. Works even without the mbstring extension. */
+function text_length(string $s): int
+{
+    return function_exists('mb_strlen') ? mb_strlen($s) : (int)preg_match_all('/./us', $s);
+}
+
+/** Cut a UTF-8 string to at most $max characters. Works even without the mbstring extension. */
+function text_cut(string $s, int $max): string
+{
+    if (function_exists('mb_substr')) {
+        return mb_substr($s, 0, $max);
+    }
+    return preg_match('/^.{0,' . $max . '}/us', $s, $m) ? $m[0] : '';
+}
+
 /** Trim a string and limit its length. */
 function clean_string($value, int $maxLength = 255): string
 {
-    return mb_substr(trim((string)$value), 0, $maxLength);
+    return text_cut(trim((string)$value), $maxLength);
 }

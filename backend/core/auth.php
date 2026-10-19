@@ -88,3 +88,15 @@ function require_admin(): array
     }
     return $user;
 }
+
+/** The only user fields the API ever sends to the app (never the password hash). */
+function public_user(array $row): array
+{
+    return [
+        'id'               => (int)$row['id'],
+        'name'             => $row['name'],
+        'email'            => $row['email'],
+        'role'             => $row['role'],
+        'style_preference' => $row['style_preference'],
+    ];
+}

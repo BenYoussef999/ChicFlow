@@ -1,65 +1,109 @@
 package com.chicflow.tunisia.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import com.chicflow.tunisia.R;
 import com.chicflow.tunisia.network.ApiClient;
 import com.chicflow.tunisia.network.ApiConfig;
+import com.chicflow.tunisia.utils.SessionManager;
+import com.chicflow.tunisia.utils.Validators;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.google.android.material.button.MaterialButton;
-
-/**
- * STAGE 1 PLACEHOLDER: only a "Test connection" button that calls ping.php.
- * In stage 2 this screen becomes the real login form.
- */
 public class LoginActivity extends AppCompatActivity {
 
-    private TextView tvStatus;
-    private MaterialButton btnTest;
+    private TextInputLayout tilEmail, tilPassword;
+    private TextInputEditText etEmail, etPassword;
+    private MaterialButton btnLogin;
+    private CircularProgressIndicator progress;
+    private TextView tvError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        tvStatus = findViewById(R.id.tvStatus);
-        btnTest = findViewById(R.id.btnTestConnection);
+        tilEmail = findViewById(R.id.tilEmail);
+        tilPassword = findViewById(R.id.tilPassword);
+        etEmail = findViewById(R.id.etEmail);
+        etPassword = findViewById(R.id.etPassword);
+        btnLogin = findViewById(R.id.btnLogin);
+        progress = findViewById(R.id.progress);
+        tvError = findViewById(R.id.tvError);
 
-        btnTest.setOnClickListener(v -> testConnection());
+        btnLogin.setOnClickListener(v -> attemptLogin());
+        findViewById(R.id.tvGoRegister).setOnClickListener(v ->
+                startActivity(new Intent(this, RegisterActivity.class)));
+
+        // "Done" key on the keyboard also logs in
+        etPassword.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                attemptLogin();
+                return true;
+            }
+            return false;
+        });
     }
 
-    private void testConnection() {
-        btnTest.setEnabled(false);
-        tvStatus.setTextColor(ContextCompat.getColor(this, R.color.cf_brown));
-        tvStatus.setText(R.string.status_testing);
+    private void attemptLogin() {
+        tilEmail.setError(null);
+        tilPassword.setError(null);
+        tvError.setVisibility(View.GONE);
 
-        ApiClient.getInstance(this).get(ApiConfig.PING, new ApiClient.Callback() {
+        String email = String.valueOf(etEmail.getText()).trim();
+        String password = String.valueOf(etPassword.getText());
+
+        boolean valid = true;
+        if (!Validators.isValidEmail(email)) {
+            tilEmail.setError(getString(R.string.err_email));
+            valid = false;
+        }
+        if (password.isEmpty()) {
+            tilPassword.setError(getString(R.string.err_password_required));
+            valid = false;
+        }
+        if (!valid) return;
+
+        JSONObject body = new JSONObject();
+        try {
+            body.put("email", email);
+            body.put("password", password);
+        } catch (JSONException e) {
+            return;
+        }
+
+        setLoading(true);
+        ApiClient.getInstance(this).post(ApiConfig.LOGIN, body, new ApiClient.Callback() {
             @Override
             public void onSuccess(JSONObject data) {
-                btnTest.setEnabled(true);
-                boolean schemaOk = data.optBoolean("schema_ok", false);
-                tvStatus.setTextColor(ContextCompat.getColor(LoginActivity.this,
-                        schemaOk ? R.color.cf_success : R.color.cf_error));
-                tvStatus.setText("Server reachable\n"
-                        + "PHP " + data.optString("php_version") + "\n"
-                        + "Database: " + data.optString("database") + "\n"
-                        + "Tables found: " + data.optInt("table_count") + " / 9\n"
-                        + (schemaOk ? "Schema OK" : "Schema incomplete: import schema.sql"));
+                new SessionManager(LoginActivity.this).saveFromAuthResponse(data);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
 
             @Override
             public void onError(String message, int httpStatus) {
-                btnTest.setEnabled(true);
-                tvStatus.setTextColor(ContextCompat.getColor(LoginActivity.this, R.color.cf_error));
-                tvStatus.setText("Failed: " + message
-                        + (httpStatus > 0 ? "\n(HTTP " + httpStatus + ")" : ""));
+                setLoading(false);
+                tvError.setText(message);
+                tvError.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    private void setLoading(boolean loading) {
+        progress.setVisibility(loading ? View.VISIBLE : View.GONE);
+        btnLogin.setEnabled(!loading);
     }
 }

@@ -3,6 +3,8 @@ package com.chicflow.tunisia.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import org.json.JSONObject;
+
 /**
  * Remembers who is logged in (token, id, name, role) using SharedPreferences.
  * Used from stage 2 onward.
@@ -29,6 +31,16 @@ public class SessionManager {
                 .putString(KEY_NAME, name)
                 .putString(KEY_ROLE, role)
                 .apply();
+    }
+
+    /** Saves the "data" part of a login/register answer: { token, user: {id, name, role...} } */
+    public void saveFromAuthResponse(JSONObject data) {
+        JSONObject user = data.optJSONObject("user");
+        if (user == null) {
+            user = new JSONObject();
+        }
+        saveSession(data.optString("token"), user.optInt("id", -1),
+                user.optString("name"), user.optString("role", "user"));
     }
 
     public String getToken()  { return prefs.getString(KEY_TOKEN, null); }
