@@ -10,6 +10,11 @@
         <item name="colorSurface">@color/cf_white</item>
         <item name="colorOnSurface">@color/cf_brown</item>
         <item name="android:colorBackground">@color/cf_beige</item>
+        <item name="colorSecondaryContainer">@color/cf_beige_dark</item>
+        <item name="colorOnSecondaryContainer">@color/cf_burgundy_dark</item>
+        <item name="colorSurfaceVariant">@color/cf_beige_dark</item>
+        <item name="colorOnSurfaceVariant">@color/cf_brown_light</item>
+        <item name="colorOutline">@color/cf_outline</item>
         <item name="colorError">@color/cf_error</item>
         <item name="android:statusBarColor">@color/cf_beige</item>
         <item name="android:windowLightStatusBar">true</item>

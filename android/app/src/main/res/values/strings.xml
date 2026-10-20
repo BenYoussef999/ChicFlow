@@ -39,4 +39,72 @@
         <item>Elegant</item>
         <item>Streetwear</item>
     </string-array>
+
+    <!-- Bottom navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_wardrobe">Wardrobe</string>
+    <string name="nav_outfits">Outfits</string>
+    <string name="nav_budget">Budget</string>
+    <string name="nav_week">Week</string>
+
+    <plurals name="items_count">
+        <item quantity="one">%d item</item>
+        <item quantity="other">%d items</item>
+    </plurals>
+
+    <!-- Home -->
+    <string name="home_subtitle">Your digital wardrobe at a glance</string>
+    <string name="home_in_wardrobe">in your wardrobe</string>
+    <string name="home_card_wardrobe">My Wardrobe</string>
+    <string name="home_card_outfit">Smart Outfit</string>
+    <string name="home_card_budget">Fashion Budget</string>
+    <string name="home_card_week">My Week</string>
+
+    <!-- Wardrobe -->
+    <string name="title_wardrobe">My Wardrobe</string>
+    <string name="hint_search">Search by name or color</string>
+    <string name="filter_all">All</string>
+    <string name="filter_shirts">Shirts</string>
+    <string name="filter_trousers">Trousers</string>
+    <string name="filter_jackets">Jackets</string>
+    <string name="filter_shoes">Shoes</string>
+    <string name="filter_accessories">Accessories</string>
+    <string name="filter_other">Other</string>
+    <string name="hint_color_filter">Color</string>
+    <string name="hint_sort">Sort by</string>
+    <string name="option_all_colors">All colors</string>
+    <string name="empty_wardrobe">No items match your filters.\nTap + to add a piece.</string>
+    <string name="cd_add_item">Add item</string>
+    <string-array name="sort_options">
+        <item>Newest first</item>
+        <item>Name A to Z</item>
+        <item>Price: low to high</item>
+        <item>Price: high to low</item>
+    </string-array>
+
+    <!-- Item form -->
+    <string name="title_add_item">Add item</string>
+    <string name="title_edit_item">Edit item</string>
+    <string name="hint_item_name">Item name</string>
+    <string name="hint_category">Category</string>
+    <string name="hint_color">Color</string>
+    <string name="hint_price">Price (TND)</string>
+    <string name="hint_date">Date added</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_delete_item">Delete item</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_delete">Delete</string>
+    <string name="dialog_delete_title">Delete this item?</string>
+    <string name="dialog_delete_message">This cannot be undone.</string>
+    <string name="err_item_name">Enter a name (at least 2 characters)</string>
+    <string name="err_category">Choose a category</string>
+    <string name="err_color">Choose a color</string>
+    <string name="err_price">Enter a price between 0 and 999999 (0 if unknown)</string>
+    <string name="toast_saved">Item saved</string>
+    <string name="toast_deleted">Item deleted</string>
+    <string name="date_picker_title">Date added</string>
+    <string name="cd_back">Back</string>
+
+    <!-- Placeholders for screens coming in the next parts -->
+    <string name="placeholder_text">This screen is built in the next part of the frontend.</string>
 </resources>

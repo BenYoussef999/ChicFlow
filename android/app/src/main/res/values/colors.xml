@@ -7,6 +7,7 @@
     <color name="cf_brown_light">#6D4C41</color>
     <color name="cf_burgundy">#800020</color>
     <color name="cf_burgundy_dark">#5C0017</color>
+    <color name="cf_outline">#B8A99A</color>
     <color name="cf_success">#2E7D32</color>
     <color name="cf_error">#B3261E</color>
 </resources>

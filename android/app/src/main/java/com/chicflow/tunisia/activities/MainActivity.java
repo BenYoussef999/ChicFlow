@@ -2,25 +2,26 @@ package com.chicflow.tunisia.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.chicflow.tunisia.R;
+import com.chicflow.tunisia.fragments.HomeFragment;
+import com.chicflow.tunisia.fragments.PlaceholderFragment;
+import com.chicflow.tunisia.fragments.WardrobeFragment;
 import com.chicflow.tunisia.network.ApiClient;
 import com.chicflow.tunisia.network.ApiConfig;
 import com.chicflow.tunisia.utils.SessionManager;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONObject;
 
-/**
- * STAGE 2 PLACEHOLDER dashboard: proves that login works and that the token is accepted
- * by the server (it loads the profile). Real navigation (wardrobe, budget...) comes later.
- */
+/** Main screen: a bottom navigation bar that swaps fragments (one per tab). */
 public class MainActivity extends AppCompatActivity {
 
     private SessionManager session;
-    private TextView tvWelcome, tvInfo;
+    private BottomNavigationView bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,45 +34,70 @@ public class MainActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_main);
-        tvWelcome = findViewById(R.id.tvWelcome);
-        tvInfo = findViewById(R.id.tvInfo);
+        bottomNav = findViewById(R.id.bottomNav);
 
-        tvWelcome.setText(getString(R.string.welcome_user, session.getName()));
-        findViewById(R.id.btnLogout).setOnClickListener(v -> logout());
+        bottomNav.setOnItemSelectedListener(item -> {
+            showTab(item.getItemId());
+            return true;
+        });
 
-        loadProfile();
+        if (savedInstanceState == null) {
+            bottomNav.setSelectedItemId(R.id.nav_home);   // triggers the listener -> shows Home
+        }
+
+        checkSessionStillValid();
     }
 
-    private void loadProfile() {
-        tvInfo.setText(R.string.loading);
+    /** Called by fragments (for example the shortcut cards on Home). */
+    public void selectTab(int tabId) {
+        bottomNav.setSelectedItemId(tabId);
+    }
+
+    private void showTab(int tabId) {
+        Fragment fragment;
+        // NOTE: if/else instead of switch, because R.id values are not constants in recent Android Gradle versions
+        if (tabId == R.id.nav_home) {
+            fragment = new HomeFragment();
+        } else if (tabId == R.id.nav_wardrobe) {
+            fragment = new WardrobeFragment();
+        } else if (tabId == R.id.nav_outfits) {
+            fragment = PlaceholderFragment.newInstance(
+                    getString(R.string.home_card_outfit), getString(R.string.placeholder_text));
+        } else if (tabId == R.id.nav_budget) {
+            fragment = PlaceholderFragment.newInstance(
+                    getString(R.string.home_card_budget), getString(R.string.placeholder_text));
+        } else {
+            fragment = PlaceholderFragment.newInstance(
+                    getString(R.string.home_card_week), getString(R.string.placeholder_text));
+        }
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .commit();
+    }
+
+    /** Asks the server if our token is still valid. Only a 401 logs the user out. */
+    private void checkSessionStillValid() {
         ApiClient.getInstance(this).get(ApiConfig.PROFILE, new ApiClient.Callback() {
             @Override
             public void onSuccess(JSONObject data) {
-                JSONObject user = data.optJSONObject("user");
-                if (user == null) return;
-                String style = user.optString("style_preference", "");
-                if (style.isEmpty() || "null".equals(style)) {
-                    style = getString(R.string.style_none);
-                }
-                tvInfo.setText(getString(R.string.profile_info,
-                        user.optString("email"), user.optString("role"), style));
+                // token is fine
             }
 
             @Override
             public void onError(String message, int httpStatus) {
-                if (httpStatus == 401) {          // token expired or revoked
+                if (httpStatus == 401) {
                     session.logout();
                     goToLogin();
-                } else {
-                    tvInfo.setText(message);
                 }
+                // other errors (no network...) are ignored: the app stays usable
             }
         });
     }
 
-    private void logout() {
+    public void logout() {
         // Tell the server to delete the token, then clear it on the phone.
-        // We clear in both cases (success or failure) so the user is never stuck.
+        // We clear in both cases so the user is never stuck.
         ApiClient.getInstance(this).post(ApiConfig.LOGOUT, new JSONObject(), new ApiClient.Callback() {
             @Override
             public void onSuccess(JSONObject data) {
