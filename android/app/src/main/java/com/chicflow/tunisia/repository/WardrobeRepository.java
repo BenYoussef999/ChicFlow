@@ -49,6 +49,11 @@ public class WardrobeRepository {
         return items.size();
     }
 
+    /** All items (a copy of the list, in insertion order). */
+    public List<ClothingItem> getAll() {
+        return new ArrayList<>(items);
+    }
+
     public ClothingItem getById(int id) {
         for (ClothingItem item : items) {
             if (item.getId() == id) return item;

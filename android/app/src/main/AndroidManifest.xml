@@ -37,6 +37,16 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".activities.SavedOutfitsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.ChallengeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".activities.ItemFormActivity"
             android:exported="false"
             android:screenOrientation="portrait"

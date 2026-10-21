@@ -107,4 +107,77 @@
 
     <!-- Placeholders for screens coming in the next parts -->
     <string name="placeholder_text">This screen is built in the next part of the frontend.</string>
+
+    <!-- Occasions -->
+    <string name="occasion_university">University</string>
+    <string name="occasion_work">Work</string>
+    <string name="occasion_casual">Casual outing</string>
+    <string name="occasion_event">Special event</string>
+
+    <!-- Smart Outfit -->
+    <string name="title_smart_outfit">Smart Outfit</string>
+    <string name="outfits_subtitle">Pick an occasion and get an outfit built from your own wardrobe.</string>
+    <string name="label_occasion">Occasion</string>
+    <string name="btn_suggest">Suggest an outfit</string>
+    <string name="btn_try_another">Try another</string>
+    <string name="btn_save_favorite">Save to favorites</string>
+    <string name="btn_saved">Saved</string>
+    <string name="toast_outfit_saved">Outfit saved to favorites</string>
+    <string name="outfit_need_items">Add at least one shirt and one pair of trousers to your wardrobe first.</string>
+    <string name="outfit_rules_note">These suggestions come from simple style rules, not AI. The real AI assistant is connected in a later stage.</string>
+    <string name="btn_challenge">60-second challenge</string>
+    <string name="btn_saved_outfits">Saved outfits</string>
+
+    <!-- Saved outfits -->
+    <string name="title_saved_outfits">Saved outfits</string>
+    <string name="filter_favorites">Favorites</string>
+    <string name="empty_saved">No outfits here yet.\nGenerate one in Smart Outfit and tap Save.</string>
+    <string name="dialog_delete_outfit_title">Delete this outfit?</string>
+    <string name="toast_outfit_deleted">Outfit deleted</string>
+    <string name="cd_favorite">Toggle favorite</string>
+    <string name="cd_delete">Delete</string>
+
+    <!-- Challenge -->
+    <string name="title_challenge">60-second challenge</string>
+    <string name="challenge_idle_hint">You get an occasion and 60 seconds to build an outfit from your wardrobe.\nTap pieces to select them, then press Finish.</string>
+    <string name="challenge_need_items">Add at least 3 items to your wardrobe to play.</string>
+    <string name="btn_start_challenge">Start challenge</string>
+    <string name="btn_finish">Finish</string>
+    <string name="btn_play_again">Play again</string>
+    <string name="btn_save_outfit">Save outfit</string>
+    <string name="challenge_ready">Ready?</string>
+    <string name="challenge_dress_for">Dress for: %1$s</string>
+    <string name="challenge_score">Score: %1$d / 100</string>
+    <string name="challenge_time_up">Time is up!</string>
+    <string name="challenge_time_left">Finished with %1$d s to spare</string>
+    <string name="challenge_outfit_name">Challenge: %1$s</string>
+    <string name="challenge_outfit_note">Built in the 60-second challenge. Score: %1$d / 100.</string>
+
+    <!-- Budget -->
+    <string name="title_budget">Fashion Budget</string>
+    <string name="budget_not_set">No budget set for this month</string>
+    <string name="budget_monthly">Monthly budget: %1$s</string>
+    <string name="btn_set_budget">Set budget</string>
+    <string name="btn_edit_budget">Edit</string>
+    <string name="budget_percent_label">of your budget used</string>
+    <string name="label_spent">Spent</string>
+    <string name="label_remaining">Remaining</string>
+    <string name="label_over_budget">Over budget by</string>
+    <string name="title_purchases">Purchases</string>
+    <string name="empty_purchases">No purchases this month.\nTap + to record one.</string>
+    <string name="cd_add_purchase">Add purchase</string>
+    <string name="cd_prev_month">Previous month</string>
+    <string name="cd_next_month">Next month</string>
+    <string name="dialog_budget_title">Monthly budget</string>
+    <string name="hint_budget_amount">Budget (TND)</string>
+    <string name="err_budget">Enter an amount greater than 0 (maximum 999999)</string>
+    <string name="dialog_purchase_title">New purchase</string>
+    <string name="hint_purchase_desc">What did you buy?</string>
+    <string name="hint_purchase_amount">Amount (TND)</string>
+    <string name="hint_purchase_date">Date</string>
+    <string name="err_purchase_desc">Enter a short description</string>
+    <string name="dialog_delete_purchase_title">Delete this purchase?</string>
+    <string name="toast_purchase_added">Purchase recorded</string>
+    <string name="toast_budget_saved">Budget saved</string>
+    <string name="toast_purchase_deleted">Purchase deleted</string>
 </resources>

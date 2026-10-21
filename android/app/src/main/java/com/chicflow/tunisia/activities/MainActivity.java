@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.chicflow.tunisia.R;
+import com.chicflow.tunisia.fragments.BudgetFragment;
 import com.chicflow.tunisia.fragments.HomeFragment;
+import com.chicflow.tunisia.fragments.OutfitsFragment;
 import com.chicflow.tunisia.fragments.PlaceholderFragment;
 import com.chicflow.tunisia.fragments.WardrobeFragment;
 import com.chicflow.tunisia.network.ApiClient;
@@ -61,11 +63,9 @@ public class MainActivity extends AppCompatActivity {
         } else if (tabId == R.id.nav_wardrobe) {
             fragment = new WardrobeFragment();
         } else if (tabId == R.id.nav_outfits) {
-            fragment = PlaceholderFragment.newInstance(
-                    getString(R.string.home_card_outfit), getString(R.string.placeholder_text));
+            fragment = new OutfitsFragment();
         } else if (tabId == R.id.nav_budget) {
-            fragment = PlaceholderFragment.newInstance(
-                    getString(R.string.home_card_budget), getString(R.string.placeholder_text));
+            fragment = new BudgetFragment();
         } else {
             fragment = PlaceholderFragment.newInstance(
                     getString(R.string.home_card_week), getString(R.string.placeholder_text));
