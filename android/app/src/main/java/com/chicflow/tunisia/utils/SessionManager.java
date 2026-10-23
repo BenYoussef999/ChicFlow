@@ -43,6 +43,11 @@ public class SessionManager {
                 user.optString("name"), user.optString("role", "user"));
     }
 
+    /** Called after the profile was edited, so the greeting shows the new name. */
+    public void updateName(String name) {
+        prefs.edit().putString(KEY_NAME, name).apply();
+    }
+
     public String getToken()  { return prefs.getString(KEY_TOKEN, null); }
     public int getUserId()    { return prefs.getInt(KEY_USER_ID, -1); }
     public String getName()   { return prefs.getString(KEY_NAME, ""); }

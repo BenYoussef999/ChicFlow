@@ -29,7 +29,7 @@
             android:textColor="@color/cf_brown_light"
             android:textSize="15sp" />
 
-        <!-- Wardrobe summary -->
+        <!-- Wardrobe size -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,6 +62,113 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- Today's outfit -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardToday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="@color/cf_white"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_today_title"
+                    android:textColor="@color/cf_brown_light"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvTodayOutfit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="serif"
+                    android:textColor="@color/cf_brown"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvTodayPieces"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/cf_brown_light"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Budget of the month -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardHomeBudget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="@color/cf_white"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/home_budget_title"
+                        android:textColor="@color/cf_brown_light"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tvHomeBudgetPercent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/cf_burgundy"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvHomeBudgetLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/cf_brown"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/progressHomeBudget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:max="100"
+                    app:indicatorColor="@color/cf_burgundy"
+                    app:trackColor="@color/cf_beige_dark"
+                    app:trackCornerRadius="5dp"
+                    app:trackThickness="10dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
         <!-- Shortcuts row 1 -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,7 +179,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardWardrobe"
                 android:layout_width="0dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:clickable="true"
@@ -91,15 +198,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="👕"
-                        android:textSize="32sp" />
+                        android:textSize="30sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="4dp"
                         android:text="@string/home_card_wardrobe"
                         android:textColor="@color/cf_brown"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -107,7 +214,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardOutfit"
                 android:layout_width="0dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 android:clickable="true"
@@ -126,15 +233,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="✨"
-                        android:textSize="32sp" />
+                        android:textSize="30sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="4dp"
                         android:text="@string/home_card_outfit"
                         android:textColor="@color/cf_brown"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -150,7 +257,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardBudget"
                 android:layout_width="0dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:clickable="true"
@@ -169,15 +276,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="💰"
-                        android:textSize="32sp" />
+                        android:textSize="30sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="4dp"
                         android:text="@string/home_card_budget"
                         android:textColor="@color/cf_brown"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -185,7 +292,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardWeek"
                 android:layout_width="0dp"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 android:clickable="true"
@@ -204,26 +311,84 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="📅"
-                        android:textSize="32sp" />
+                        android:textSize="30sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="4dp"
                         android:text="@string/home_card_week"
                         android:textColor="@color/cf_brown"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
+        <!-- Local Style -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardLocal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="@color/cf_white"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="3dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🇹🇳"
+                    android:textSize="30sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_card_local"
+                        android:textColor="@color/cf_brown"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_card_local_sub"
+                        android:textColor="@color/cf_brown_light"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnLogout"
+            android:id="@+id/btnProfile"
             style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/btn_profile" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogout"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="4dp"
             android:text="@string/btn_logout" />
     </LinearLayout>
 </ScrollView>

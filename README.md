@@ -52,3 +52,23 @@ git add .
 git commit -m "Stage 1: backend foundation and Android skeleton"
 ```
 `config.php` is in `.gitignore`: your passwords and API keys never go to GitHub.
+
+
+## Status
+
+| Part | Content | Backend connected? |
+|---|---|---|
+| Stage 1 | MySQL schema, PHP core, `ping.php`, Android skeleton | yes |
+| Stage 2 | Register / login / logout / profile (token auth, roles) | yes |
+| Frontend 1 | Navigation, Home, Wardrobe (search, filter, sort, add/edit/delete) | no (in memory) |
+| Frontend 2 | Smart Outfit (rule-based), saved outfits, 60 s challenge, Budget + ProgressBar | no (in memory) |
+| Frontend 3 | My Week planner, Profile (connected), Local Style, dashboard | Profile only |
+
+"In memory" screens read their data through the `repository/` classes. Those classes are the
+only files that change when SQLite + the PHP API are plugged in.
+
+## Demo data (frontend phase)
+- 7 demo clothing items and a 300 TND budget with 180 TND spent are re-created every time the app starts.
+- The Local Style catalog is empty on purpose: brands, prices and links must be real.
+  Make yourself an administrator to add some:
+  `UPDATE users SET role='admin' WHERE email='you@example.com';` then log out and in again.

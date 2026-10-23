@@ -19,6 +19,7 @@ import com.chicflow.tunisia.R;
 import com.chicflow.tunisia.adapters.PurchaseAdapter;
 import com.chicflow.tunisia.models.Purchase;
 import com.chicflow.tunisia.repository.BudgetRepository;
+import com.chicflow.tunisia.utils.BudgetMath;
 import com.chicflow.tunisia.utils.Format;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -118,8 +119,7 @@ public class BudgetFragment extends Fragment {
             tvBudgetLine.setText(getString(R.string.budget_monthly, Format.tnd(budget)));
             btnBudget.setText(R.string.btn_edit_budget);
 
-            double percent = spent / budget * 100.0;           // 180 / 300 -> 60
-            int shown = (int) Math.round(percent);
+            int shown = BudgetMath.percent(spent, budget);      // 180 of 300 -> 60
             tvPercent.setText(shown + "%");
             progress.setProgressCompat(Math.min(100, shown), false);
 

@@ -10,7 +10,7 @@ import com.chicflow.tunisia.R;
 import com.chicflow.tunisia.fragments.BudgetFragment;
 import com.chicflow.tunisia.fragments.HomeFragment;
 import com.chicflow.tunisia.fragments.OutfitsFragment;
-import com.chicflow.tunisia.fragments.PlaceholderFragment;
+import com.chicflow.tunisia.fragments.WeekFragment;
 import com.chicflow.tunisia.fragments.WardrobeFragment;
 import com.chicflow.tunisia.network.ApiClient;
 import com.chicflow.tunisia.network.ApiConfig;
@@ -67,8 +67,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (tabId == R.id.nav_budget) {
             fragment = new BudgetFragment();
         } else {
-            fragment = PlaceholderFragment.newInstance(
-                    getString(R.string.home_card_week), getString(R.string.placeholder_text));
+            fragment = new WeekFragment();
         }
 
         getSupportFragmentManager().beginTransaction()

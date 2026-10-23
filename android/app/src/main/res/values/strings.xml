@@ -180,4 +180,58 @@
     <string name="toast_purchase_added">Purchase recorded</string>
     <string name="toast_budget_saved">Budget saved</string>
     <string name="toast_purchase_deleted">Purchase deleted</string>
+
+    <!-- Week planner -->
+    <string name="title_week">My Week</string>
+    <string name="week_subtitle">Plan what to wear, day by day.</string>
+    <string name="week_summary">%1$d of 7 days planned</string>
+    <string name="week_today">Today</string>
+    <string name="week_nothing">Nothing planned. Tap to choose an outfit.</string>
+    <string name="week_change">Change outfit</string>
+    <string name="week_remove">Remove outfit</string>
+    <string name="dialog_choose_outfit">Choose an outfit</string>
+    <string name="dialog_no_saved_outfits">You have no saved outfits yet. Create one in the Outfits tab first.</string>
+    <string name="btn_go_outfits">Go to Outfits</string>
+    <string name="toast_week_set">Outfit planned for %1$s</string>
+    <string name="toast_week_removed">Outfit removed</string>
+
+    <!-- Home dashboard -->
+    <string name="home_today_title">Outfit for today</string>
+    <string name="home_today_none">Nothing planned for today</string>
+    <string name="home_today_tap">Tap to plan your week</string>
+    <string name="home_budget_title">Budget this month</string>
+    <string name="home_budget_none">No budget set yet</string>
+    <string name="home_budget_left">%1$s left of %2$s</string>
+    <string name="home_budget_over">%1$s over a budget of %2$s</string>
+    <string name="home_budget_percent">%1$d%% used</string>
+    <string name="home_card_local">Local Style</string>
+    <string name="home_card_local_sub">Tunisian fashion brands</string>
+    <string name="btn_profile">My profile</string>
+
+    <!-- Profile -->
+    <string name="title_profile">My profile</string>
+    <string name="role_admin">Administrator</string>
+    <string name="role_member">Member</string>
+    <string name="option_no_preference">No preference</string>
+    <string name="toast_profile_saved">Profile saved</string>
+
+    <!-- Local Style -->
+    <string name="title_local_style">Local Style</string>
+    <string name="local_subtitle">Tunisian clothing brands</string>
+    <string name="empty_brands_user">No brands in the catalog yet.\nAn administrator can add real Tunisian brands here.</string>
+    <string name="empty_brands_admin">No brands yet.\nTap + to add the first one.</string>
+    <string name="btn_visit">Visit website</string>
+    <string name="cd_add_brand">Add brand</string>
+    <string name="dialog_brand_title">New brand</string>
+    <string name="hint_brand_name">Brand name</string>
+    <string name="hint_brand_category">Category (for example clothing, shoes)</string>
+    <string name="hint_brand_price">Indicative price range (optional)</string>
+    <string name="hint_brand_url">Website (optional)</string>
+    <string name="err_brand_name">Enter the brand name</string>
+    <string name="err_brand_category">Enter a category</string>
+    <string name="err_brand_url">Enter a valid website address, or leave it empty</string>
+    <string name="toast_brand_added">Brand added</string>
+    <string name="toast_brand_deleted">Brand removed</string>
+    <string name="dialog_delete_brand_title">Remove this brand?</string>
+    <string name="toast_no_browser">No app found to open this link</string>
 </resources>
