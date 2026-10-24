@@ -63,6 +63,8 @@ git commit -m "Stage 1: backend foundation and Android skeleton"
 | Frontend 1 | Navigation, Home, Wardrobe (search, filter, sort, add/edit/delete) | no (in memory) |
 | Frontend 2 | Smart Outfit (rule-based), saved outfits, 60 s challenge, Budget + ProgressBar | no (in memory) |
 | Frontend 3 | My Week planner, Profile (connected), Local Style, dashboard | Profile only |
+| Backend 3 | Full REST API: wardrobe, outfits, budget, purchases, weekly plan, brands, sync snapshot | API ready, tested (145 checks) |
+| Next | Android networking + SQLite + sync, then AI endpoint, deployment | |
 
 "In memory" screens read their data through the `repository/` classes. Those classes are the
 only files that change when SQLite + the PHP API are plugged in.
@@ -72,3 +74,14 @@ only files that change when SQLite + the PHP API are plugged in.
 - The Local Style catalog is empty on purpose: brands, prices and links must be real.
   Make yourself an administrator to add some:
   `UPDATE users SET role='admin' WHERE email='you@example.com';` then log out and in again.
+
+## Backend: install / update (stage 3)
+1. **Existing database** (created before stage 3): in phpMyAdmin, select `chicflow` -> SQL tab ->
+   paste `backend/database/migrations/002_add_client_uuid.sql` -> Go. (Run it once.)
+   **New database:** just import `backend/database/schema.sql` (it already includes the change).
+2. Copy the updated `backend` folder over `C:\xampp\htdocs\chicflow` (your `config/config.php` is not in the zip, so it stays).
+3. Open http://localhost/chicflow/api/ping.php -> must show `"migrated":true,"schema_ok":true`.
+4. Run the automatic test (needs PHP on the PATH; XAMPP has it in `C:\xampp\php`):
+   `C:\xampp\php\php.exe backend\tests\api_test.php http://localhost/chicflow/api`
+   -> `ALL 145 CHECKS PASSED`.
+Full endpoint list: `backend/API.md`.

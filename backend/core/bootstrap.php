@@ -27,6 +27,7 @@ function config(): array
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/validate.php';
+require_once __DIR__ . '/models.php';
 
 send_json_headers();
 

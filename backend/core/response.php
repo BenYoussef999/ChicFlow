@@ -21,14 +21,14 @@ function send_json_headers(): void
 function json_success($data = [], int $status = 200): void
 {
     http_response_code($status);
-    echo json_encode(['success' => true, 'data' => $data], JSON_UNESCAPED_UNICODE);
+    echo json_encode(['success' => true, 'data' => $data], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION);
     exit;
 }
 
 function json_error(string $message, int $status = 400): void
 {
     http_response_code($status);
-    echo json_encode(['success' => false, 'message' => $message], JSON_UNESCAPED_UNICODE);
+    echo json_encode(['success' => false, 'message' => $message], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION);
     exit;
 }
 
@@ -59,12 +59,12 @@ function require_fields(array $body, array $fields): void
 {
     $missing = [];
     foreach ($fields as $f) {
-        if (!isset($body[$f]) || (is_string($body[$f]) && trim($body[$f]) === '')) {
+        if (!isset($body[$f]) || is_array($body[$f]) || (is_string($body[$f]) && trim($body[$f]) === '')) {
             $missing[] = $f;
         }
     }
     if ($missing) {
-        json_error('Missing field(s): ' . implode(', ', $missing), 422);
+        json_error('Missing or invalid field(s): ' . implode(', ', $missing), 422);
     }
 }
 
