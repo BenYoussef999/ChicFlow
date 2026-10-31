@@ -185,16 +185,34 @@
                 android:clipToPadding="false"
                 android:paddingBottom="88dp" />
 
-            <TextView
-                android:id="@+id/tvEmpty"
+            <LinearLayout
+                android:id="@+id/layoutEmpty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:text="@string/empty_wardrobe"
-                android:textColor="@color/cf_brown_light"
-                android:textSize="15sp"
-                android:visibility="gone" />
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="24dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvEmpty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/empty_wardrobe"
+                    android:textColor="@color/cf_brown_light"
+                    android:textSize="15sp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSamples"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/btn_add_samples"
+                    android:visibility="gone" />
+            </LinearLayout>
         </FrameLayout>
     </LinearLayout>
 

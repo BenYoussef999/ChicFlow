@@ -12,7 +12,7 @@ package com.chicflow.tunisia.network;
  */
 public class ApiConfig {
 
-    public static final String BASE_URL = "http://10.0.2.2/chicflow/api/";
+    public static final String BASE_URL = "http://10.0.2.2:8000/api/";
 
     // Endpoint names (we add more in each stage)
     public static final String PING = "ping.php";

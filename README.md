@@ -64,13 +64,17 @@ git commit -m "Stage 1: backend foundation and Android skeleton"
 | Frontend 2 | Smart Outfit (rule-based), saved outfits, 60 s challenge, Budget + ProgressBar | no (in memory) |
 | Frontend 3 | My Week planner, Profile (connected), Local Style, dashboard | Profile only |
 | Backend 3 | Full REST API: wardrobe, outfits, budget, purchases, weekly plan, brands, sync snapshot | API ready, tested (145 checks) |
-| Next | Android networking + SQLite + sync, then AI endpoint, deployment | |
+| Increment 1 | **SQLite + sync for the wardrobe** (offline use, background sync, status line on Home) | yes, tested (47 + 60 checks) |
+| Next | Increment 2: outfits + week plan, 3: budget + purchases, then AI endpoint, login throttling, deployment | |
 
 "In memory" screens read their data through the `repository/` classes. Those classes are the
 only files that change when SQLite + the PHP API are plugged in.
 
-## Demo data (frontend phase)
-- 7 demo clothing items and a 300 TND budget with 180 TND spent are re-created every time the app starts.
+## Demo data
+- The wardrobe is stored in SQLite and synchronised. A new account starts empty: use **Add sample items**
+  on the empty Wardrobe screen to get 7 examples (they are normal items, they sync and can be deleted).
+- Outfits, budget (a 300 TND budget with 180 TND spent is re-created at each start), purchases and the week plan
+  are still in memory until the next increments.
 - The Local Style catalog is empty on purpose: brands, prices and links must be real.
   Make yourself an administrator to add some:
   `UPDATE users SET role='admin' WHERE email='you@example.com';` then log out and in again.
@@ -85,3 +89,7 @@ only files that change when SQLite + the PHP API are plugged in.
    `C:\xampp\php\php.exe backend\tests\api_test.php http://localhost/chicflow/api`
    -> `ALL 145 CHECKS PASSED`.
 Full endpoint list: `backend/API.md`.
+
+## Offline and sync
+Design: `docs/SYNC.md`. Tests: `tests/sync/README.md`
+(`bash tests/sync/run_sync_tests.sh http://localhost/chicflow/api/` in Git Bash).

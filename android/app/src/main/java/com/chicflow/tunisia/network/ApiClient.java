@@ -11,6 +11,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.Volley;
 import com.chicflow.tunisia.utils.SessionManager;
 
@@ -19,11 +20,18 @@ import org.json.JSONObject;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Sends JSON requests to the PHP API and unwraps the standard answer:
- *   { "success": true,  "data": {...} }   -> callback.onSuccess(data)
- *   { "success": false, "message": "..." } -> callback.onError(message, httpStatus)
+ *   { "success": true,  "data": {...} }   -> data
+ *   { "success": false, "message": "..." } -> an error with the message and the HTTP status
+ *
+ * Two ways to use it:
+ *  - get() / post() with a Callback: for screens (answer arrives on the main thread)
+ *  - asTransport(): blocking calls, for the sync engine (background thread ONLY)
  *
  * The login token (if any) is added automatically as "Authorization: Bearer ...".
  */
@@ -52,6 +60,8 @@ public class ApiClient {
         return instance;
     }
 
+    // ================================================================= for screens (callbacks)
+
     public void get(String endpoint, Callback callback) {
         send(Request.Method.GET, endpoint, null, callback);
     }
@@ -78,19 +88,80 @@ public class ApiClient {
                 }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("Accept", "application/json");
-                String token = session.getToken();
-                if (token != null) {
-                    headers.put("Authorization", "Bearer " + token);
-                }
-                return headers;
+                return buildHeaders();
             }
         };
 
         // 15 s timeout, NO automatic retry (a retried POST could create duplicates)
         request.setRetryPolicy(new DefaultRetryPolicy(15000, 0, 1f));
         queue.add(request);
+    }
+
+    // ================================================================= for the sync engine (blocking)
+
+    /** Blocking version of get()/post(). Never call it from the main thread. */
+    public Transport asTransport() {
+        return new Transport() {
+            @Override
+            public JSONObject get(String endpoint) throws ApiException {
+                return executeBlocking(Request.Method.GET, endpoint, null);
+            }
+
+            @Override
+            public JSONObject post(String endpoint, JSONObject body) throws ApiException {
+                return executeBlocking(Request.Method.POST, endpoint, body);
+            }
+        };
+    }
+
+    private JSONObject executeBlocking(int method, String endpoint, JSONObject body) throws ApiException {
+        String url = ApiConfig.BASE_URL + endpoint;
+
+        // The RequestFuture is both the "success" and the "error" listener: get() waits for either
+        RequestFuture<JSONObject> future = RequestFuture.newFuture();
+        JsonObjectRequest request = new JsonObjectRequest(method, url, body, future, future) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return buildHeaders();
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(15000, 0, 1f));
+        future.setRequest(queue.add(request));
+
+        try {
+            JSONObject response = future.get(30, TimeUnit.SECONDS);
+            if (response.optBoolean("success", false)) {
+                JSONObject data = response.optJSONObject("data");
+                return data != null ? data : new JSONObject();
+            }
+            throw new ApiException(response.optString("message", "Unknown error"), 200);
+        } catch (ExecutionException e) {
+            Throwable cause = e.getCause();
+            if (cause instanceof VolleyError) {
+                VolleyError error = (VolleyError) cause;
+                int status = error.networkResponse != null ? error.networkResponse.statusCode : -1;
+                throw new ApiException(describeError(error), status);
+            }
+            throw new ApiException("Network error.", -1);
+        } catch (TimeoutException e) {
+            future.cancel(true);
+            throw new ApiException("The server took too long to answer.", -1);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new ApiException("Interrupted.", -1);
+        }
+    }
+
+    // ================================================================= shared
+
+    private Map<String, String> buildHeaders() {
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Accept", "application/json");
+        String token = session.getToken();
+        if (token != null) {
+            headers.put("Authorization", "Bearer " + token);
+        }
+        return headers;
     }
 
     /** Turns a VolleyError into a message a user (or you) can understand. */

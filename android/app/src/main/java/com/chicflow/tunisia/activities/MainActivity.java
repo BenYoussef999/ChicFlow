@@ -14,13 +14,14 @@ import com.chicflow.tunisia.fragments.WeekFragment;
 import com.chicflow.tunisia.fragments.WardrobeFragment;
 import com.chicflow.tunisia.network.ApiClient;
 import com.chicflow.tunisia.network.ApiConfig;
+import com.chicflow.tunisia.sync.SyncManager;
 import com.chicflow.tunisia.utils.SessionManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONObject;
 
 /** Main screen: a bottom navigation bar that swaps fragments (one per tab). */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SyncManager.Listener {
 
     private SessionManager session;
     private BottomNavigationView bottomNav;
@@ -48,6 +49,29 @@ public class MainActivity extends AppCompatActivity {
         }
 
         checkSessionStillValid();
+        SyncManager.getInstance().requestSync();      // download this account's data / send waiting changes
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SyncManager.getInstance().addListener(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SyncManager.getInstance().removeListener(this);
+    }
+
+    /** If the server says our login expired during a sync, go back to the login screen. */
+    @Override
+    public void onSyncChanged() {
+        if (session.isLoggedIn() && SyncManager.getInstance().isAuthExpired()) {
+            session.logout();
+            SyncManager.getInstance().resetForLogout();
+            goToLogin();
+        }
     }
 
     /** Called by fragments (for example the shortcut cards on Home). */
@@ -112,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void finishLogout() {
         session.logout();
+        SyncManager.getInstance().resetForLogout();
         goToLogin();
     }
 

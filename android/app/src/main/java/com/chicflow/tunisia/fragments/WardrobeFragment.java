@@ -21,6 +21,7 @@ import com.chicflow.tunisia.activities.ItemFormActivity;
 import com.chicflow.tunisia.adapters.ClothingAdapter;
 import com.chicflow.tunisia.models.ClothingItem;
 import com.chicflow.tunisia.repository.WardrobeRepository;
+import com.chicflow.tunisia.sync.SyncManager;
 import com.chicflow.tunisia.utils.ClothingOptions;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
@@ -31,12 +32,14 @@ import java.util.Arrays;
 import java.util.List;
 
 /** The wardrobe: grid of items with search, category chips, color filter and sorting. */
-public class WardrobeFragment extends Fragment {
+public class WardrobeFragment extends Fragment implements SyncManager.Listener {
 
     private final WardrobeRepository repo = WardrobeRepository.getInstance();
 
     private ClothingAdapter adapter;
     private TextView tvCount, tvEmpty;
+    private View layoutEmpty;
+    private View btnSamples;
     private TextInputEditText etSearch;
     private ChipGroup chipGroup;
 
@@ -57,6 +60,12 @@ public class WardrobeFragment extends Fragment {
 
         tvCount = view.findViewById(R.id.tvCount);
         tvEmpty = view.findViewById(R.id.tvEmpty);
+        layoutEmpty = view.findViewById(R.id.layoutEmpty);
+        btnSamples = view.findViewById(R.id.btnSamples);
+        btnSamples.setOnClickListener(v -> {
+            repo.addSampleItems();
+            refresh();
+        });
         etSearch = view.findViewById(R.id.etSearch);
         chipGroup = view.findViewById(R.id.chipGroup);
 
@@ -105,6 +114,24 @@ public class WardrobeFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        SyncManager.getInstance().addListener(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        SyncManager.getInstance().removeListener(this);
+    }
+
+    /** A sync just brought changes from the server (or sent ours): redraw the grid. */
+    @Override
+    public void onSyncChanged() {
+        refresh();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         refresh();      // also reloads after coming back from the add/edit screen
@@ -128,7 +155,10 @@ public class WardrobeFragment extends Fragment {
         adapter.setItems(result);
         int n = result.size();
         tvCount.setText(getResources().getQuantityString(R.plurals.items_count, n, n));
-        tvEmpty.setVisibility(n == 0 ? View.VISIBLE : View.GONE);
+        boolean wardrobeEmpty = repo.count() == 0;
+        layoutEmpty.setVisibility(n == 0 ? View.VISIBLE : View.GONE);
+        tvEmpty.setText(wardrobeEmpty ? R.string.empty_wardrobe_first : R.string.empty_wardrobe);
+        btnSamples.setVisibility(wardrobeEmpty ? View.VISIBLE : View.GONE);
     }
 
     private void openForm(@Nullable ClothingItem item) {

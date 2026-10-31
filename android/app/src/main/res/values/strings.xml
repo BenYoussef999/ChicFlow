@@ -234,4 +234,21 @@
     <string name="toast_brand_deleted">Brand removed</string>
     <string name="dialog_delete_brand_title">Remove this brand?</string>
     <string name="toast_no_browser">No app found to open this link</string>
+
+    <!-- Synchronisation -->
+    <string name="sync_syncing">Syncing\u2026</string>
+    <string name="sync_never">Not synced yet. Tap to sync.</string>
+    <string name="sync_ok">Synced %1$s</string>
+    <string name="sync_ok_pending">Synced %1$s \u00B7 %2$s</string>
+    <string name="sync_offline">Offline. Tap to retry.</string>
+    <string name="sync_offline_pending">Offline \u00B7 %1$s</string>
+    <string name="sync_issues">%1$d change(s) refused by the server. Tap to retry.</string>
+    <plurals name="sync_waiting">
+        <item quantity="one">%d change waiting to sync</item>
+        <item quantity="other">%d changes waiting to sync</item>
+    </plurals>
+
+    <!-- Wardrobe: empty state -->
+    <string name="empty_wardrobe_first">Your wardrobe is empty.\nAdd your first piece with + or load some examples.</string>
+    <string name="btn_add_samples">Add sample items</string>
 </resources>

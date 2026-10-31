@@ -29,6 +29,21 @@
             android:textColor="@color/cf_brown_light"
             android:textSize="15sp" />
 
+        <TextView
+            android:id="@+id/tvSyncStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/bg_badge"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingStart="12dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/cf_brown"
+            android:textSize="12sp" />
+
         <!-- Wardrobe size -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"

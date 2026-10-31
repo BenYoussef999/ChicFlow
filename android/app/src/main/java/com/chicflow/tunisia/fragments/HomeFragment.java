@@ -22,6 +22,7 @@ import com.chicflow.tunisia.repository.BudgetRepository;
 import com.chicflow.tunisia.repository.OutfitRepository;
 import com.chicflow.tunisia.repository.WardrobeRepository;
 import com.chicflow.tunisia.repository.WeekRepository;
+import com.chicflow.tunisia.sync.SyncManager;
 import com.chicflow.tunisia.utils.BudgetMath;
 import com.chicflow.tunisia.utils.ClothingOptions;
 import com.chicflow.tunisia.utils.Format;
@@ -35,9 +36,9 @@ import java.util.List;
 import java.util.Locale;
 
 /** Dashboard: greeting, today's outfit, budget summary and shortcuts to the other screens. */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements SyncManager.Listener {
 
-    private TextView tvGreeting, tvItemCount, tvTodayOutfit, tvTodayPieces;
+    private TextView tvGreeting, tvItemCount, tvTodayOutfit, tvTodayPieces, tvSyncStatus;
     private TextView tvBudgetLine, tvBudgetPercent;
     private LinearProgressIndicator progressBudget;
 
@@ -54,6 +55,8 @@ public class HomeFragment extends Fragment {
 
         tvGreeting = view.findViewById(R.id.tvGreeting);
         tvItemCount = view.findViewById(R.id.tvItemCount);
+        tvSyncStatus = view.findViewById(R.id.tvSyncStatus);
+        tvSyncStatus.setOnClickListener(v -> SyncManager.getInstance().requestSync());
         tvTodayOutfit = view.findViewById(R.id.tvTodayOutfit);
         tvTodayPieces = view.findViewById(R.id.tvTodayPieces);
         tvBudgetLine = view.findViewById(R.id.tvHomeBudgetLine);
@@ -75,6 +78,24 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        SyncManager.getInstance().addListener(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        SyncManager.getInstance().removeListener(this);
+    }
+
+    /** The sync finished (or started): data may have changed, so redraw everything. */
+    @Override
+    public void onSyncChanged() {
+        refresh();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         refresh();      // also runs when coming back from Profile, Week or Budget
@@ -83,6 +104,8 @@ public class HomeFragment extends Fragment {
     private void refresh() {
         tvGreeting.setText(getString(R.string.welcome_user,
                 new SessionManager(requireContext()).getName()));
+
+        tvSyncStatus.setText(SyncManager.getInstance().describeStatus(requireContext()));
 
         int count = WardrobeRepository.getInstance().count();
         tvItemCount.setText(getResources().getQuantityString(R.plurals.items_count, count, count));
