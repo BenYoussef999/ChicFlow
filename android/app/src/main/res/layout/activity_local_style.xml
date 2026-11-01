@@ -57,6 +57,6 @@
         android:contentDescription="@string/cd_add_brand"
         android:src="@drawable/ic_add"
         android:visibility="gone"
-        app:backgroundTint="@color/cf_burgundy"
+        app:backgroundTint="@color/cf_violet"
         app:tint="@color/cf_white" />
 </FrameLayout>

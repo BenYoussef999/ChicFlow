@@ -129,8 +129,7 @@ public class BudgetFragment extends Fragment {
             tvRemaining.setText(Format.tnd(Math.abs(remaining)));
 
             int color = ContextCompat.getColor(requireContext(),
-                    over ? R.color.cf_error : R.color.cf_burgundy);
-            progress.setIndicatorColor(color);
+                    over ? R.color.cf_error : R.color.cf_violet);            progress.setIndicatorColor(color);
             tvRemaining.setTextColor(ContextCompat.getColor(requireContext(),
                     over ? R.color.cf_error : R.color.cf_brown));
         }

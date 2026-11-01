@@ -13,7 +13,7 @@
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:text="@string/title_week"
-        android:textColor="@color/cf_burgundy"
+        android:textColor="@color/cf_violet"
         android:textSize="26sp"
         android:textStyle="bold" />
 

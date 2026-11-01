@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="serif"
-                android:textColor="@color/cf_burgundy"
+                android:textColor="@color/cf_violet"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -59,7 +59,7 @@
                 android:layout_marginTop="8dp"
                 android:max="60000"
                 android:progress="60000"
-                app:indicatorColor="@color/cf_burgundy"
+                app:indicatorColor="@color/cf_violet"
                 app:trackColor="@color/cf_beige_dark"
                 app:trackCornerRadius="6dp"
                 app:trackThickness="12dp" />
@@ -109,7 +109,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="serif"
-                    android:textColor="@color/cf_burgundy"
+                    android:textColor="@color/cf_violet"
                     android:textSize="28sp"
                     android:textStyle="bold" />
 

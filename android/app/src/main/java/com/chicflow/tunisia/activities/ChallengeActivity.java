@@ -156,7 +156,7 @@ public class ChallengeActivity extends AppCompatActivity {
         progress.setProgressCompat((int) ms, false);
 
         boolean low = state == STATE_RUNNING && seconds <= 10;
-        int color = ContextCompat.getColor(this, low ? R.color.cf_error : R.color.cf_burgundy);
+        int color = ContextCompat.getColor(this, low ? R.color.cf_error : R.color.cf_violet);
         tvTimer.setTextColor(low ? color : ContextCompat.getColor(this, R.color.cf_brown));
         progress.setIndicatorColor(color);
     }

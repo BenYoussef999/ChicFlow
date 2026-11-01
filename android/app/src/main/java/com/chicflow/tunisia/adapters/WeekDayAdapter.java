@@ -58,8 +58,7 @@ public class WeekDayAdapter extends RecyclerView.Adapter<WeekDayAdapter.ViewHold
         holder.tvDay.setText(WeekDays.name(plan.getDay()));
         holder.tvToday.setVisibility(isToday ? View.VISIBLE : View.GONE);
         holder.card.setStrokeColor(ContextCompat.getColor(holder.itemView.getContext(),
-                isToday ? R.color.cf_burgundy : R.color.cf_beige_dark));
-        holder.card.setStrokeWidth(Math.round((isToday ? 2 : 1) * density));
+                isToday ? R.color.cf_violet : R.color.cf_beige_dark));        holder.card.setStrokeWidth(Math.round((isToday ? 2 : 1) * density));
 
         if (plan.isPlanned()) {
             holder.tvOutfit.setText(plan.getOutfit().getName());

@@ -18,7 +18,7 @@
             android:paddingEnd="20dp"
             android:fontFamily="serif"
             android:text="@string/title_budget"
-            android:textColor="@color/cf_burgundy"
+            android:textColor="@color/cf_violet"
             android:textSize="26sp"
             android:textStyle="bold" />
 
@@ -115,7 +115,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="serif"
-                        android:textColor="@color/cf_burgundy"
+                        android:textColor="@color/cf_violet"
                         android:textSize="40sp"
                         android:textStyle="bold" />
 
@@ -135,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:max="100"
-                    app:indicatorColor="@color/cf_burgundy"
+                    app:indicatorColor="@color/cf_violet"
                     app:trackColor="@color/cf_beige_dark"
                     app:trackCornerRadius="6dp"
                     app:trackThickness="12dp" />
@@ -240,6 +240,6 @@
         android:layout_margin="20dp"
         android:contentDescription="@string/cd_add_purchase"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/cf_burgundy"
+        app:backgroundTint="@color/cf_violet"
         app:tint="@color/cf_white" />
 </FrameLayout>

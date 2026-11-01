@@ -71,8 +71,7 @@ public class ClothingAdapter extends RecyclerView.Adapter<ClothingAdapter.ViewHo
 
         holder.tvCheck.setVisibility(selected ? View.VISIBLE : View.GONE);
         holder.card.setStrokeColor(ContextCompat.getColor(holder.itemView.getContext(),
-                selected ? R.color.cf_burgundy : R.color.cf_beige_dark));
-        holder.card.setStrokeWidth(Math.round((selected ? 3 : 1) * density));
+                selected ? R.color.cf_violet : R.color.cf_beige_dark));        holder.card.setStrokeWidth(Math.round((selected ? 3 : 1) * density));
 
         holder.itemView.setOnClickListener(v -> listener.onItemClick(item));
     }

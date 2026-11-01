@@ -28,7 +28,7 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:text="@string/title_wardrobe"
-                android:textColor="@color/cf_burgundy"
+                android:textColor="@color/cf_violet"
                 android:textSize="26sp"
                 android:textStyle="bold" />
 
@@ -224,6 +224,6 @@
         android:layout_margin="20dp"
         android:contentDescription="@string/cd_add_item"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/cf_burgundy"
+        app:backgroundTint="@color/cf_violet"
         app:tint="@color/cf_white" />
 </FrameLayout>
