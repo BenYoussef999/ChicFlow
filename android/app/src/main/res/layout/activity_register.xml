@@ -22,7 +22,7 @@
             android:layout_marginBottom="24dp"
             android:fontFamily="serif"
             android:text="@string/app_name"
-            android:textColor="@color/cf_burgundy"
+            android:textColor="@color/cf_violet"
             android:textSize="26sp"
             android:textStyle="bold" />
 
@@ -163,7 +163,7 @@
             android:layout_marginTop="24dp"
             android:padding="8dp"
             android:text="@string/link_to_login"
-            android:textColor="@color/cf_burgundy"
+            android:textColor="@color/cf_violet"
             android:textSize="15sp"
             android:textStyle="bold" />
     </LinearLayout>

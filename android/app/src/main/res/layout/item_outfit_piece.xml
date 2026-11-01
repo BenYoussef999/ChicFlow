@@ -12,12 +12,12 @@
         android:layout_width="46dp"
         android:layout_height="46dp">
 
-        <TextView
+        <ImageView
             android:id="@+id/pieceEmoji"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:layout_gravity="center"
-            android:textSize="22sp" />
+            android:contentDescription="@null" />
     </FrameLayout>
 
     <LinearLayout

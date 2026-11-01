@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="serif"
             android:text="@string/title_smart_outfit"
-            android:textColor="@color/cf_burgundy"
+            android:textColor="@color/cf_violet"
             android:textSize="26sp"
             android:textStyle="bold" />
 

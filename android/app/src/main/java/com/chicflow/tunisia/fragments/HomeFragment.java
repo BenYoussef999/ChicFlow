@@ -146,8 +146,7 @@ public class HomeFragment extends Fragment implements SyncManager.Listener {
             tvBudgetPercent.setText(getString(R.string.home_budget_percent, percent));
             progressBudget.setProgressCompat(Math.min(100, percent), false);
             progressBudget.setIndicatorColor(ContextCompat.getColor(requireContext(),
-                    over ? R.color.cf_error : R.color.cf_burgundy));
-        }
+                    over ? R.color.cf_error : R.color.cf_violet));        }
     }
 
     private void goTo(int tabId) {
